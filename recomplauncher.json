@@ -1,0 +1,341 @@
+$g="D:\The Godfather X360 RECOMP BUILD\godfather_recomp_github"; mkdir "$g\.github\workflows" -Force | Out-Null; @'
+{
+  "$schema": "https://recomplauncher.com",
+  "format": 1,
+  "name": "The Godfather: The Game",
+  "repo": "JK-4799/The-Godfather-The-Game-REX360-Cmake-Files-Has-Audio-and-Video-Broken-Save-Issues-",
+  "game": {
+    "kind": "folder",
+    "label": "Your extracted Xbox 360 copy of The Godfather: The Game (USA, Title ID 454107E9) containing default.xex and godfath0.viv through godfath12.viv.",
+    "check": {
+      "file": "default.xex"
+    }
+  },
+  "start": {
+    "program": [
+      "godfather_recomp.exe"
+    ],
+    "args": [
+      "--game_data_root={game}"
+    ]
+  },
+  "config": [
+    {
+      "id": "main",
+      "format": "toml",
+      "file": [
+        {
+          "path": "{install}/godfather_recomp.toml"
+        }
+      ],
+      "ensure": {
+        "app/cache_root": "\"{app.root}/cache\"",
+        "runtime/title_memory_mb": "0",
+        "runtime/ignore_thread_priorities": "true",
+        "apu/driver": "\"sdl3\"",
+        "apu/max_queued_frames": "32",
+        "gpu.xenos/allow_invalid_fetch_constants": "true",
+        "gpu.xenos/readback_resolve": "\"none\"",
+        "gpu.xenos/readback_memexport": "false",
+        "gpu.xenos/occlusion_query_enable": "false",
+        "gpu.xenos/clear_memory_page_state": "true"
+      },
+      "new": {
+        "gpu/driver": "\"d3d12\"",
+        "gpu/vsync": "false",
+        "gpu/frame_limit": "0.0",
+        "gpu/resolution_scale_x": "1",
+        "gpu/resolution_scale_y": "1",
+        "gpu/anisotropic_override": "0",
+        "ui/fullscreen": "false",
+        "ui/window_width": "1280",
+        "ui/window_height": "720",
+        "ui/video_mode_width": "1280",
+        "ui/video_mode_height": "720",
+        "ui/video_mode_refresh_rate": "60.0",
+        "log/level": "\"warn\"",
+        "log/console": "false"
+      }
+    }
+  ],
+  "saves": [
+    "{install}/user",
+    "{install}/godfather_recomp.toml"
+  ],
+  "folders": {
+    "saves": [
+      {
+        "path": "{install}/user"
+      }
+    ],
+    "logs": [
+      {
+        "path": "{install}/logs"
+      }
+    ]
+  },
+  "looks": {
+    "graphics_key": "gpu/driver",
+    "in": "main"
+  },
+  "settings": [
+    {
+      "id": "graphics_api",
+      "label": "Graphics API",
+      "help": "D3D12 is recommended for shader compatibility. Vulkan uses cached pipelines.",
+      "choices": [
+        {
+          "label": "D3D12",
+          "set": {
+            "gpu/driver": "\"d3d12\""
+          }
+        },
+        {
+          "label": "Vulkan",
+          "set": {
+            "gpu/driver": "\"vulkan\""
+          }
+        }
+      ],
+      "defaults": {
+        "gpu/driver": "\"d3d12\""
+      }
+    },
+    {
+      "id": "window",
+      "label": "Window mode",
+      "help": "Fullscreen fills your monitor. Windowed uses the selected window resolution.",
+      "choices": [
+        {
+          "label": "Windowed",
+          "set": {
+            "ui/fullscreen": "false"
+          }
+        },
+        {
+          "label": "Fullscreen",
+          "set": {
+            "ui/fullscreen": "true"
+          }
+        }
+      ],
+      "defaults": {
+        "ui/fullscreen": "false"
+      }
+    },
+    {
+      "id": "window_size",
+      "label": "Window size",
+      "help": "Window dimensions when running in Windowed mode.",
+      "when": {
+        "ui/fullscreen": "false"
+      },
+      "choices": [
+        {
+          "label": "1280 x 720",
+          "set": {
+            "ui/window_width": "1280",
+            "ui/window_height": "720",
+            "ui/video_mode_width": "1280",
+            "ui/video_mode_height": "720"
+          }
+        },
+        {
+          "label": "1920 x 1080",
+          "set": {
+            "ui/window_width": "1920",
+            "ui/window_height": "1080",
+            "ui/video_mode_width": "1920",
+            "ui/video_mode_height": "1080"
+          }
+        },
+        {
+          "label": "2560 x 1440",
+          "set": {
+            "ui/window_width": "2560",
+            "ui/window_height": "1440",
+            "ui/video_mode_width": "2560",
+            "ui/video_mode_height": "1440"
+          }
+        }
+      ],
+      "defaults": {
+        "ui/window_width": "1280",
+        "ui/window_height": "720",
+        "ui/video_mode_width": "1280",
+        "ui/video_mode_height": "720",
+        "ui/fullscreen": "false"
+      }
+    },
+    {
+      "id": "resolution",
+      "label": "Internal resolution",
+      "help": "Rendering resolution scale. 1x is native Xbox 360 720p.",
+      "choices": [
+        {
+          "label": "1x (720p)",
+          "set": {
+            "gpu/resolution_scale_x": "1",
+            "gpu/resolution_scale_y": "1"
+          }
+        },
+        {
+          "label": "2x (1440p)",
+          "set": {
+            "gpu/resolution_scale_x": "2",
+            "gpu/resolution_scale_y": "2"
+          }
+        }
+      ],
+      "defaults": {
+        "gpu/resolution_scale_x": "1",
+        "gpu/resolution_scale_y": "1"
+      }
+    },
+    {
+      "id": "vsync",
+      "label": "V-Sync",
+      "help": "Synchronize presentation with your display refresh rate. Keep Off on 30 Hz displays to avoid frame caps.",
+      "choices": [
+        {
+          "label": "Off",
+          "set": {
+            "gpu/vsync": "false"
+          }
+        },
+        {
+          "label": "On",
+          "set": {
+            "gpu/vsync": "true"
+          }
+        }
+      ],
+      "defaults": {
+        "gpu/vsync": "false"
+      }
+    },
+    {
+      "id": "filtering",
+      "label": "Anisotropic filtering",
+      "help": "Improves texture clarity at oblique viewing angles.",
+      "choices": [
+        {
+          "label": "Game default",
+          "set": {
+            "gpu/anisotropic_override": "0"
+          }
+        },
+        {
+          "label": "4x",
+          "set": {
+            "gpu/anisotropic_override": "4"
+          }
+        },
+        {
+          "label": "8x",
+          "set": {
+            "gpu/anisotropic_override": "8"
+          }
+        },
+        {
+          "label": "16x",
+          "set": {
+            "gpu/anisotropic_override": "16"
+          }
+        }
+      ],
+      "defaults": {
+        "gpu/anisotropic_override": "0"
+      }
+    },
+    {
+      "id": "thread_affinity",
+      "label": "Thread affinity",
+      "help": "Follow Xbox 360 hardware thread masks or let Windows schedule across all cores.",
+      "advanced": true,
+      "choices": [
+        {
+          "label": "Xbox 360 layout",
+          "set": {
+            "runtime/ignore_thread_affinities": "false"
+          }
+        },
+        {
+          "label": "OS scheduled",
+          "set": {
+            "runtime/ignore_thread_affinities": "true"
+          }
+        }
+      ],
+      "defaults": {
+        "runtime/ignore_thread_affinities": "false"
+      }
+    },
+    {
+      "id": "log_level",
+      "label": "Diagnostic logging",
+      "help": "Write runtime warnings and errors to logs/ for bug reports.",
+      "advanced": true,
+      "choices": [
+        {
+          "label": "Warnings & errors",
+          "set": {
+            "log/level": "\"warn\""
+          }
+        },
+        {
+          "label": "Off",
+          "set": {
+            "log/level": "\"off\""
+          }
+        },
+        {
+          "label": "Verbose info",
+          "set": {
+            "log/level": "\"info\""
+          }
+        }
+      ],
+      "defaults": {
+        "log/level": "\"warn\""
+      }
+    }
+  ],
+  "actions": [
+    {
+      "id": "saves",
+      "label": "Saves",
+      "help": "Open the local Xbox 360 user profile and save directory.",
+      "open": "saves"
+    },
+    {
+      "id": "logs",
+      "label": "Logs",
+      "help": "Open diagnostic logs for troubleshooting.",
+      "open": "logs"
+    }
+  ]
+}
+'@ | Set-Content "$g\recomplauncher.json" -Encoding UTF8; @'
+name: Package RecompLauncher Release
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+jobs:
+  package-windows-x64:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Prepare release package layout
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force -Path dist/godfather_recomp-windows-x64 | Out-Null
+          Copy-Item recomplauncher.json dist/godfather_recomp-windows-x64/recomplauncher.json
+          Copy-Item README.md dist/godfather_recomp-windows-x64/README.md
+      - name: Note on binary attachment
+        shell: pwsh
+        run: |
+          Write-Host "Ensure godfather_recomp.exe and ReXGlue runtime DLLs are placed in dist/godfather_recomp-windows-x64/ alongside recomplauncher.json (without shipping godfather_recomp.toml so updates preserve user settings)."
