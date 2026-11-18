@@ -1,6 +1,6 @@
 # The Godfather: The Game (Xbox 360) - Static Recompilation (ReXGlue)
 
-Community static recompilation project for **The Godfather: The Game** (Xbox 360, USA, Title ID `454107E9`, Media ID `39C09F0B`, `default.xex` patched via XexTool) built with **ReXGlue SDK v0.11.0**.
+Community static recompilation project for **The Godfather: The Game** (Xbox 360, USA, Title ID `454107E9`, Media ID `39C09F0B`, `default.xex` patched via XexTool to Title Update 1 ) built with **ReXGlue SDK v0.11.0**.
 
 ## Current Status
 * **Working:** Boots into menus, Bink FMVs, and 3D gameplay via D3D12 (`allow_invalid_fetch_constants = true`, `readback_resolve = none`).
