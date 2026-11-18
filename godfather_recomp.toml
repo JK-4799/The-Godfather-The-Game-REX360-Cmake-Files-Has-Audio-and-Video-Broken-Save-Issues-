@@ -1,0 +1,38 @@
+[app]
+cache_root = "{app.root}/cache"
+
+[runtime]
+ffmpeg_verbose = true
+title_memory_mb = 0
+ignore_thread_priorities = true
+ignore_thread_affinities = true
+
+[apu]
+max_queued_frames = 32
+
+[gpu]
+driver = "vulkan"
+vsync = false
+frame_limit = 0.0
+resolution_scale_x = 1
+resolution_scale_y = 1
+anisotropic_override = 0
+
+[gpu.xenos]
+allow_invalid_fetch_constants = true
+readback_resolve = "none"
+readback_memexport = false
+occlusion_query_enable = false
+clear_memory_page_state = true
+
+[ui]
+fullscreen = false
+window_width = 1280
+window_height = 720
+video_mode_width = 1280
+video_mode_height = 720
+video_mode_refresh_rate = 60.0
+
+[log]
+level = "warn"
+console = false
